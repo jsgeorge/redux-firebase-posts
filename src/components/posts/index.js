@@ -5,7 +5,7 @@ import _ from "lodash";
 import ListItem from "./listItem";
 
 class ListPosts extends Component {
-  state = { title: "", category: "", post: "" };
+  state = { title: "", category: "", text: "" };
   renderAddForm() {
     return (
       <div>
@@ -19,7 +19,7 @@ class ListPosts extends Component {
               onChange={this.handleTitleInputChange.bind(this)}
             />
           </div>
-          {/* <div className="form-group">
+          <div className="form-group">
             <input
               className="form-control"
               placeholder="Category"
@@ -31,10 +31,10 @@ class ListPosts extends Component {
             <input
               className="form-control"
               placeholder="What's on you mind"
-              value={this.state.post}
+              value={this.state.text}
               onChange={this.handlePostInputChange.bind(this)}
-            /> 
-            </div>*/}
+            />
+          </div>
           <button action="submit" className="btn btn-primary">
             Create Post
           </button>
@@ -53,7 +53,7 @@ class ListPosts extends Component {
     return <div>No current posts</div>;
   }
   handlePostInputChange(e) {
-    this.setState({ post: e.target.value });
+    this.setState({ text: e.target.value });
   }
   handleCtgryInputChange(e) {
     this.setState({ category: e.target.value });
@@ -63,7 +63,12 @@ class ListPosts extends Component {
   }
   onFormSubmit(e) {
     e.preventDefault();
-    this.props.createPost({ post: this.state.post });
+    let newPost = {
+      title: this.state.title,
+      category: this.state.category,
+      text: this.state.text
+    };
+    this.props.createPost(newPost);
     this.setState({ post: "", title: "", category: "" });
   }
 

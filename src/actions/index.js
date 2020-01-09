@@ -36,6 +36,7 @@ export function fetchPost(id) {
   };
 }
 export function createPost(post) {
+  console.log(post);
   return dispatch => postsRef.push(post);
 }
 export function deletePost(key) {
